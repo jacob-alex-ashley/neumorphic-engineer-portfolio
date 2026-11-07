@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDownRight, ArrowUpRight, Code2, Cpu, GitBranch, Layers3, MoveUpRight, Radio, Workflow, type LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import portrait from "@/assets/engineer-portrait.jpg.asset.json";
 import { ArticleLinks, ContactForm, PortfolioHeader, TestimonialCarousel } from "@/components/portfolio/portfolio-interactions";
@@ -114,17 +115,18 @@ function PortfolioHome() {
   );
 }
 
-function SectionHeading({ number, eyebrow, title }: { number: string; eyebrow: string; title: React.ReactNode }) {
+function SectionHeading({ number, eyebrow, title }: { number: string; eyebrow: string; title: ReactNode }) {
   return <div className="section-heading"><span className="section-number">{number} <i /></span><div><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div></div>;
 }
 
 function ArchitectureGraphic({ variant }: { variant: number }) {
-  const points = [
+  const pointSets: Array<Array<[number, number]>> = [
     [[13, 50], [35, 23], [38, 73], [62, 35], [65, 68], [87, 50]],
     [[14, 32], [34, 60], [50, 30], [68, 66], [87, 38]],
     [[16, 65], [28, 35], [50, 48], [72, 27], [86, 62]],
     [[14, 48], [35, 48], [50, 26], [50, 71], [70, 48], [88, 48]],
-  ][variant];
-  const Icon = architectureIcons[variant];
+  ];
+  const points = pointSets[variant] ?? pointSets[0];
+  const Icon = architectureIcons[variant] ?? architectureIcons[0];
   return <div className={`architecture-graphic architecture-variant-${variant}`}><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="13" y1="50" x2="35" y2="23"/><line x1="35" y1="23" x2="38" y2="73"/><line x1="38" y1="73" x2="62" y2="35"/><line x1="62" y1="35" x2="65" y2="68"/><line x1="65" y1="68" x2="87" y2="50"/><line x1="35" y1="23" x2="62" y2="35"/><line x1="38" y1="73" x2="65" y2="68"/>{points.map(([x, y], index) => <circle key={index} cx={x} cy={y} r={index === 2 ? 2.8 : 1.9} />)}</svg><span className="architecture-center"><Icon aria-hidden="true" /></span></div>;
 }

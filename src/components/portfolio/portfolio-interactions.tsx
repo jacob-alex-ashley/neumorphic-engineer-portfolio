@@ -82,7 +82,6 @@ export function ContactForm() {
 }
 
 export function ArticleLinks() {
-  const navigate = useNavigate();
   return <>{articles.map((article) => (
     <Link key={article.slug} to="/writing/$slug" params={{ slug: article.slug }} className="article-link">
       <div className="article-meta"><span>{article.category}</span><span>{article.minutes} MIN READ</span></div>
